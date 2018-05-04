@@ -21,7 +21,7 @@ public class ListProductsController {
         RestTemplate restTemplate = new RestTemplate();
         Iterable products = null;
         try {
-            products = restTemplate.getForEntity(new URL("http://localhost:8083/product/").toURI(), Iterable.class).getBody();
+            products = restTemplate.getForEntity(new URL("http://localhost:8082/product/").toURI(), Iterable.class).getBody();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
