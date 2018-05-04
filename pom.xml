@@ -16,10 +16,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>tracing-demo-ui</module>
-        <module>tracing-demo-data</module>
         <module>tracing-demo-service</module>
         <module>tracing-demo-service-discovery</module>
         <module>tracing-demo-gateway</module>
+        <module>tracing-demo-product-ms</module>
+        <module>tracing-demo-order-ms</module>
     </modules>
     <name>tracing-demo</name>
     <description>Demo project for Spring Boot</description>

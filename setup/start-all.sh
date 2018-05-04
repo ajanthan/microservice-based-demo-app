@@ -36,15 +36,15 @@ fi
 nohup java -javaagent:$agent_location/business-service/skywalking-agent.jar -jar $bussinessservice 2>> $bs_log >> /dev/null &
 echo $! > $bussinessservicePID
 
-echo "Starting gateway"
-gw_log=$log_location/gateway.log
-
-if [ ! -f $gw_log ]; then
-    mkdir -p $log_location
-    touch $gw_log
-fi
-nohup java -javaagent:$agent_location/gateway/skywalking-agent.jar -jar $gateway 2>> $gw_log >> /dev/null &
-echo $! > $gatewayPID
+#echo "Starting gateway"
+#gw_log=$log_location/gateway.log
+#
+#if [ ! -f $gw_log ]; then
+#    mkdir -p $log_location
+#    touch $gw_log
+#fi
+#nohup java -javaagent:$agent_location/gateway/skywalking-agent.jar -jar $gateway 2>> $gw_log >> /dev/null &
+#echo $! > $gatewayPID
 
 echo "Starting webui"
 ui_log=$log_location/web-ui.log
