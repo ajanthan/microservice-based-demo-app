@@ -22,9 +22,11 @@ public class CartController {
     }
 
     @PostMapping("/cart/{productId}")
-    public void addToCart(@PathVariable("productId") String productIdStr) {
-        Long productId = Long.getLong(productIdStr);
+    public String addToCart(@PathVariable("productId") Long productId) {
+        //Long productId = Long.getLong(productIdStr);
         cartService.addToCart(productId);
+        System.out.println("Adding "+productId);
+        return "redirect:/";
     }
 
     @PostMapping("/cart/{productId}/{quantity}")
@@ -39,4 +41,6 @@ public class CartController {
     public void checkout(UserPrincipal principal) {
         cartService.checkout(principal.getName());
     }
+
+
 }
