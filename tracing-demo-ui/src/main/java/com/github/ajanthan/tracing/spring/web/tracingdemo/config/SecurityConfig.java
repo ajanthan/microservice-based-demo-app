@@ -1,22 +1,61 @@
 package com.github.ajanthan.tracing.spring.web.tracingdemo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/**")
-            .hasAnyRole("ADMIN","USER").and().formLogin();
+        http
+            .authorizeRequests()
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .loginPage("/login")
+            .permitAll()
+            .and()
+            .logout()
+            .permitAll().clearAuthentication(true);
     }
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("john").password("admin").roles("USER");
-        auth.inMemoryAuthentication().withUser("bass").password("admin").roles("USER");
-        auth.inMemoryAuthentication().withUser("rock").password("admin").roles("USER");
+    @Bean
+    public UserDetailsService userDetailsService(AuthenticationManagerBuilder auth) throws Exception {
+        UserDetails user =
+            User.withUsername("user")
+                .password("password")
+                .passwordEncoder(password ->{
+                    return passwordEncoder().encode(password);
+                })
+                .roles("USER")
+                .build();
+        UserDetails admin =
+            User.withUsername("admin")
+                .password("admin")
+                .passwordEncoder(password ->{
+                    return passwordEncoder().encode(password);
+                })
+                .roles("USER")
+                .build();
+        User.builder();
 
+        return new InMemoryUserDetailsManager(user,admin);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
     }
 }
