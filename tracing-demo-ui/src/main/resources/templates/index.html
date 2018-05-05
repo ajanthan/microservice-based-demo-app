@@ -12,9 +12,23 @@
     <title>Product List</title>
 </head>
 <body>
-<h1>Product List</h1>
-<div class="container">
+<nav class="navbar navbar-light bg-primary justify-content-between" tyle="background-color: #e3f2fd;">
+    <a class="navbar-brand">ACM Store</a>
+    <div class="nav-item dropdown">
+    <div th:text="${#httpServletRequest.remoteUser}" class="nav-item dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+    </div>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: auto;">
+        <form class="form" th:action="@{/logout}" method="post">
+            <button class="btn btn-primary btn-link" type="submit" value="Sign Out">Sign Out</button>
+        </form>
+        <a class="menu-item" href="/cart">checkout</a>
+    </div>
+    </div>
+</nav>
+<div class="container py-5">
     <!-- Content here -->
+
 
     <div class="card-deck-wrapper col-sm-*">
         <div class="card-deck">
@@ -29,7 +43,9 @@
                         <span class="card-badge badge-secondary badge-pill m-1" th:each="tag : ${product.tags}"
                               th:text="${tag}"></span>
                     </div>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <form th:action="${'/cart/' + product.id}" method="post">
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
                 </div>
             </div>
 
