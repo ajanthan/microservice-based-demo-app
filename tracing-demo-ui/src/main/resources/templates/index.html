@@ -49,27 +49,17 @@
             </div>
         </div>
         <div class="col-md-3">
-            <form class="form">
+            <form th:action="@{/cart/}" method="post" class="form">
                 <table class="table">
                     <thead>
                     <th class="align-center">Shopping Chart</th>
                     </thead>
-                    <tr>
+                    <tr th:each="cartItem : ${cart}">
                         <td>
-                            <div>Sun Glass</div>
+                            <div th:text="${cartItem.name}">Sun Glass</div>
                         </td>
                         <td>
-                            <div>1</div>
-                        </td>
-                        <td><a class="btn btn-danger" value="Delete">Delete</a></td>
-                        <td><a class="btn btn-primary" value="update">Update</a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>Chair</div>
-                        </td>
-                        <td>
-                            <div>2</div>
+                            <div th:text="${cartItem.quantity}">1</div>
                         </td>
                         <td><a class="btn btn-danger" value="Delete">Delete</a></td>
                         <td><a class="btn btn-primary" value="update">Update</a></td>
@@ -78,6 +68,19 @@
                 </table>
                 <button class="btn btn-primary float-right" type="submit">Checkout</button>
             </form>
+            <table class="table">
+                <thead>
+                <th class="align-center">Order Details</th>
+                </thead>
+                <tr th:each="orderItem : ${orderList}">
+                    <td>
+                        <div th:text="${orderItem.id}">Sun Glass</div>
+                    </td>
+                    <td><a class="btn btn-danger" value="Delete">Cancel</a></td>
+
+                </tr>
+            </table>
+            </table>
         </div>
     </div>
 </div>

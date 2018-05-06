@@ -41,12 +41,13 @@ public class CartService {
         for (Long porductId : orderMap.keySet()) {
             orderDetails.add(new OrderDetails(porductId, orderMap.get(porductId)));
         }
-        order.setOrderDetails(orderDetails);
+        order.setOrders(orderDetails);
 
         ResponseEntity<String> responseEntity = orderClient.postForEntity("http://localhost:8084/order/", order, String.class);
         orderMap.clear();
     }
-    public Map<Long,Integer> getOrderMap(){
+
+    public Map<Long, Integer> getOrderMap() {
         return orderMap;
     }
 }

@@ -2,13 +2,13 @@ package com.github.ajanthan.tracing.spring.web.tracingdemo.controller;
 
 import com.github.ajanthan.tracing.spring.web.tracingdemo.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.nio.file.attribute.UserPrincipal;
 
 @Controller
 public class CartController {
@@ -25,7 +25,7 @@ public class CartController {
     public String addToCart(@PathVariable("productId") Long productId) {
         //Long productId = Long.getLong(productIdStr);
         cartService.addToCart(productId);
-        System.out.println("Adding "+productId);
+        System.out.println("Adding " + productId);
         return "redirect:/";
     }
 
@@ -38,8 +38,10 @@ public class CartController {
     }
 
     @PostMapping("/cart")
-    public void checkout(UserPrincipal principal) {
-        cartService.checkout(principal.getName());
+    public String checkout(Authentication authentication) {
+        UserDetails details = (UserDetails) authentication.getPrincipal();
+        cartService.checkout(details.getUsername());
+        return "redirect:/";
     }
 
 

@@ -21,7 +21,7 @@ public class OrderService {
 //       order.setCount(10);
 //       order.setProductId(1L);
 //       order.setUserId("2e334");
-        System.out.println("Order "+order);
+        System.out.println("Order " + order);
         repository.save(order);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
@@ -42,8 +42,8 @@ public class OrderService {
         return repository.findAll();
     }
 
-    @RequestMapping(value = "/user/{userId}")
-    public Iterable<com.github.ajanthan.tracing.spring.ms.order.model.Order> getOrderOfUser(@PathVariable("userId") String userId){
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    public Iterable<com.github.ajanthan.tracing.spring.ms.order.model.Order> getOrderOfUser(@PathVariable("userId") String userId) {
         return repository.getOrderOfUser(userId);
     }
 }
