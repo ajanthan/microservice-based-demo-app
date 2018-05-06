@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,43 +15,71 @@
 <nav class="navbar navbar-light bg-primary justify-content-between" tyle="background-color: #e3f2fd;">
     <a class="navbar-brand">ACM Store</a>
     <div class="nav-item dropdown">
-    <div th:text="${#httpServletRequest.remoteUser}" class="nav-item dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-    </div>
-    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: auto;">
-        <form class="form" th:action="@{/logout}" method="post">
-            <button class="btn btn-primary btn-link" type="submit" value="Sign Out">Sign Out</button>
-        </form>
-        <a class="menu-item" href="/cart">checkout</a>
-    </div>
+        <div th:text="${#httpServletRequest.remoteUser}" class="nav-item dropdown-toggle" href="#"
+             id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </div>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: auto;">
+            <form class="form" th:action="@{/logout}" method="post">
+                <button class="btn btn-primary btn-link" type="submit" value="Sign Out">Sign Out</button>
+            </form>
+            <a class="menu-item" href="/cart">checkout</a>
+        </div>
     </div>
 </nav>
 <div class="container py-5">
     <!-- Content here -->
-
-
-    <div class="card-deck-wrapper col-sm-*">
-        <div class="card-deck">
-
-
-            <div class="card" style="width: 18rem;" th:each="product : ${products}">
-                <img class="card-img-top" th:src="${'http://localhost:8082/image/'+product.id}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${product.name}"></h5>
-                    <p class="card-text" th:text="${product.description}"></p>
-                    <div class="row">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card-columns">
+                <div class="card" th:each="product : ${products}">
+                    <img class="card-img-top" style="width: 10 rem;"
+                         th:src="${'http://localhost:8082/image/'+product.id}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${product.name}"></h5>
+                        <p class="card-text" th:text="${product.description}"></p>
+                        <div class="row">
                         <span class="card-badge badge-secondary badge-pill m-1" th:each="tag : ${product.tags}"
                               th:text="${tag}"></span>
+                        </div>
+                        <form th:action="${'/cart/' + product.id}" method="post">
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
                     </div>
-                    <form th:action="${'/cart/' + product.id}" method="post">
-                    <button type="submit" class="btn btn-primary">Add to Cart</button>
-                    </form>
                 </div>
             </div>
-
+        </div>
+        <div class="col-md-3">
+            <form class="form">
+                <table class="table">
+                    <thead>
+                    <th class="align-center">Shopping Chart</th>
+                    </thead>
+                    <tr>
+                        <td>
+                            <div>Sun Glass</div>
+                        </td>
+                        <td>
+                            <div>1</div>
+                        </td>
+                        <td><a class="btn btn-danger" value="Delete">Delete</a></td>
+                        <td><a class="btn btn-primary" value="update">Update</a></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Chair</div>
+                        </td>
+                        <td>
+                            <div>2</div>
+                        </td>
+                        <td><a class="btn btn-danger" value="Delete">Delete</a></td>
+                        <td><a class="btn btn-primary" value="update">Update</a></td>
+                    </tr>
+                </table>
+                </table>
+                <button class="btn btn-primary float-right" type="submit">Checkout</button>
+            </form>
         </div>
     </div>
-
 </div>
 
 <!-- Optional JavaScript -->
