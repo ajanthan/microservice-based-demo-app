@@ -1,0 +1,42 @@
+info:
+  component: Edge Server
+  
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+zuul:
+  prefix: /api
+  routes:
+    product:
+      path: /product/**
+      serviceId: product-service
+    image:
+      path: /image/**
+      serviceId: image-service
+    order:
+      path: /order/**
+      serviceId: order-service
+
+
+ribbon:
+  eureka:
+    enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8085/eureka/
+    registerWithEureka: false
+      
+server:
+  port: 8081
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG

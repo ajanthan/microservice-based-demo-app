@@ -16,7 +16,7 @@ import java.nio.file.Files;
 @RestController
 
 public class ImageService {
-    @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getImage(@PathVariable("id") String id) throws IOException {
         InputStream file = getClass().getClassLoader().getResourceAsStream(  "static/"+id + ".jpg");
 

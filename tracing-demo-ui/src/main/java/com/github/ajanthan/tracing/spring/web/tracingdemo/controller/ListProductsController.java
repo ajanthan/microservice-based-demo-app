@@ -28,7 +28,7 @@ public class ListProductsController {
         RestTemplate restTemplate = new RestTemplate();
         Iterable products = null;
         try {
-            products = restTemplate.getForEntity(new URL("http://localhost:8081/product/").toURI(), Iterable.class).getBody();
+            products = restTemplate.getForEntity(new URL("http://localhost:8081/api/product/").toURI(), Iterable.class).getBody();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -49,7 +49,7 @@ public class ListProductsController {
             cartItems.add(new CartItem(productList.get(pId).getName(), pId, cartMap.get(pId)));
         }
 
-        Iterator orderItems = restTemplate.getForEntity("http://localhost:8084/order/user/" + details.getUsername(), Iterable.class).getBody().iterator();
+        Iterator orderItems = restTemplate.getForEntity("http://localhost:8081/api/order/user/" + details.getUsername(), Iterable.class).getBody().iterator();
 
         List<Order> orders = new ArrayList<>();
 

@@ -43,7 +43,7 @@ public class CartService {
         }
         order.setOrders(orderDetails);
 
-        ResponseEntity<String> responseEntity = orderClient.postForEntity("http://localhost:8084/order/", order, String.class);
+        ResponseEntity<String> responseEntity = orderClient.postForEntity("http://localhost:8081/api/order/", order, String.class);
         orderMap.clear();
     }
 

@@ -33,7 +33,7 @@
             <div class="card-columns">
                 <div class="card" th:each="product : ${products}">
                     <img class="card-img-top" style="width: 10 rem;"
-                         th:src="${'http://localhost:8082/image/'+product.id}" alt="Card image cap">
+                         th:src="${'http://localhost:8081/api/image/'+product.id}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${product.name}"></h5>
                         <p class="card-text" th:text="${product.description}"></p>
