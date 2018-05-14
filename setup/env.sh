@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
+productms=../tracing-demo-product-ms/target/tracing-demo-product-ms-0.0.1-SNAPSHOT.jar
+productmsPID=productms.pid
 
-dataservice=../tracing-demo-data/target/tracing-demo-data-0.0.1-SNAPSHOT.jar
-dataservicePID=dataservice.pid
+imagems=../tracing-demo-image-ms/target/tracing-demo-image-ms-0.0.1-SNAPSHOT.jar
+imagemsPID=imagems.pid
 
-bussinessservice=../tracing-demo-service/target/tracing-demo-service-0.0.1-SNAPSHOT.jar
-bussinessservicePID=bussinessservice.pid
+orderms=../tracing-demo-order-ms/target/tracing-demo-order-ms-0.0.1-SNAPSHOT.jar
+ordermsPID=orderms.pid
+
+eureka=../tracing-demo-service-discovery/target/tracing-demo-service-discovery-0.0.1-SNAPSHOT.jar
+eurekaPID=eureka.pid
 
 gateway=../tracing-demo-gateway/target/tracing-demo-gateway-0.0.1-SNAPSHOT.jar
 gatewayPID=gateway.pid

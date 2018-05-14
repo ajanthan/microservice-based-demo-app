@@ -1,21 +1,40 @@
 #!/usr/bin/env bash
 source env.sh
 
-if [ -f $dataservicePID ]; then
-    PID=$(cat $dataservicePID);
+if [ -f $productmsPID ]; then
+    PID=$(cat $productmsPID);
     kill $PID;
-    rm $dataservicePID
+    rm $productmsPID
 else
-    echo "dataservice is not running"
+    echo "product ms is not running"
 fi
 
-if [ -f $bussinessservicePID ]; then
-    PID=$(cat $bussinessservicePID);
+
+if [ -f $imagemsPID ]; then
+    PID=$(cat $imagemsPID);
     kill $PID;
-    rm $bussinessservicePID
+    rm $imagemsPID
 else
-    echo "bussinessservice is not running"
+    echo "image ms is not running"
 fi
+
+
+if [ -f $ordermsPID ]; then
+    PID=$(cat $ordermsPID);
+    kill $PID;
+    rm $ordermsPID
+else
+    echo "order ms is not running"
+fi
+
+if [ -f $eurekaPID ]; then
+    PID=$(cat $eurekaPID);
+    kill $PID;
+    rm $eurekaPID
+else
+    echo "eureka is not running"
+fi
+
 
 if [ -f $gatewayPID ]; then
     PID=$(cat $gatewayPID);
